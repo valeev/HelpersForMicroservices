@@ -57,7 +57,7 @@ namespace Infrastructure.Logging
                     switch (exception.Code.ToLower())
                     {
                         case "notfound":
-                            serviceError.StatusCode = 422;
+                            serviceError.StatusCode = 404;
                             break;
                         case "notauthorized":
                             serviceError.StatusCode = 401;
