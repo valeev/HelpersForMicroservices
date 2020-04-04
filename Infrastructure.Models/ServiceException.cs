@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Infrastructure.Logging
+namespace Infrastructure.Models
 {
     /// <summary>
     /// Custom service exception

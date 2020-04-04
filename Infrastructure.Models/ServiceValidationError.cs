@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Infrastructure.Logging
+namespace Infrastructure.Models
 {
     /// <summary>
     /// Service validation error

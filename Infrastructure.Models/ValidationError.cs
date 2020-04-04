@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Logging
+﻿namespace Infrastructure.Models
 {
     /// <summary>
     /// Validation error

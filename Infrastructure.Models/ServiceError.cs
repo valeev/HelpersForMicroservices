@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Infrastructure.Logging
+namespace Infrastructure.Models
 {
     /// <summary>
     /// Common service error
