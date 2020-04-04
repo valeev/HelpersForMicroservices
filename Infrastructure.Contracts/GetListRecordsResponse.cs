@@ -29,7 +29,7 @@
         /// <summary>
         /// Default constructor
         /// </summary>
-        private GetListRecordsResponse(int skipped, int limit, int totalAmount)
+        protected GetListRecordsResponse(int skipped, int limit, int totalAmount)
         {
             Skipped = skipped;
             Limit = limit;
