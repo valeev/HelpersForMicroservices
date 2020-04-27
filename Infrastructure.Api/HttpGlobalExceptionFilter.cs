@@ -49,7 +49,11 @@ namespace Infrastructure.Logging
             {
                 serviceError.Code = exception.Code;
                 serviceError.Message = exception.Message;
-                if (string.IsNullOrEmpty(exception.Code))
+                if (exception.StatusCode.HasValue)
+                {
+                    serviceError.StatusCode = exception.StatusCode.Value;
+                }
+                else if (string.IsNullOrEmpty(exception.Code))
                 {
                     serviceError.StatusCode = 200;
                 }

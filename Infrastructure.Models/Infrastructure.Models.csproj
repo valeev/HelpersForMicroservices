@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -9,10 +9,10 @@
     <Description>Generatl models for microservices</Description>
     <PackageProjectUrl>https://github.com/valeev/HelpersForMicroservices</PackageProjectUrl>
     <PackageTags>helper, middleware, common</PackageTags>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
     <PackageId>Valeev.Infrastructure.Models</PackageId>
-    <FileVersion>1.0.0.0</FileVersion>
+    <FileVersion>1.0.2.0</FileVersion>
     <ServerGarbageCollection>false</ServerGarbageCollection>
   </PropertyGroup>
 
