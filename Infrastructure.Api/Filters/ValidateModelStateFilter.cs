@@ -1,21 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Infrastructure.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Infrastructure.Logging
+namespace Infrastructure.Api
 {
-    /// <summary>
-    /// IAction result for custom validation errors response
-    /// </summary>
-    public class ValidationErrorsResult : IActionResult
+    public class ValidateModelStateFilter : ActionFilterAttribute
     {
-        /// <summary>
-        /// Convert validation errors to proper response
-        /// </summary>
-        public async Task ExecuteResultAsync(ActionContext context)
+        public override void OnActionExecuting(ActionExecutingContext context)
         {
+            if (context.ModelState.IsValid)
+            {
+                return;
+            }
+
             var modelStateEntries = context.ModelState.Where(e => e.Value.Errors.Count > 0).ToArray();
             var errors = new List<ValidationError>();
 
@@ -25,7 +24,7 @@ namespace Infrastructure.Logging
                 {
                     errors.Add(new ValidationError
                     {
-                        Name = modelStateEntries[0].Key,
+                        Field = modelStateEntries[0].Key,
                         Description = modelStateEntries[0].Value.Errors[0].ErrorMessage
                     });
                 }
@@ -37,7 +36,7 @@ namespace Infrastructure.Logging
                         {
                             var error = new ValidationError
                             {
-                                Name = modelStateEntry.Key,
+                                Field = modelStateEntry.Key,
                                 Description = modelStateError.ErrorMessage
                             };
                             errors.Add(error);
@@ -54,11 +53,10 @@ namespace Infrastructure.Logging
                 ValidationErrors = errors
             };
 
-            var result = new JsonResult(serviceError)
+            context.Result = new JsonResult(serviceError)
             {
                 StatusCode = serviceError.StatusCode
             };
-            await result.ExecuteResultAsync(context);
         }
     }
 }

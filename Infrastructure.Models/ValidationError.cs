@@ -8,7 +8,7 @@
         /// <summary>
         /// Field name
         /// </summary>
-        public string Name { get; set; }
+        public string Field { get; set; }
 
         /// <summary>
         /// Error description

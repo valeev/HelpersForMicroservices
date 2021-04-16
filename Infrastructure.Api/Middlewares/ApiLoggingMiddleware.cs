@@ -4,10 +4,11 @@ using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Logging
+namespace Infrastructure.Api
 {
     /// <summary>
     /// Middleware for logging all requests and responses
@@ -18,14 +19,16 @@ namespace Infrastructure.Logging
 
         private readonly RequestDelegate _next;
         private ILogger<ApiLoggingMiddleware> _logger;
+        private LoggingConfiguration _loggingConfiguration;
 
         #endregion
 
         #region Constructors
 
-        public ApiLoggingMiddleware(RequestDelegate next)
+        public ApiLoggingMiddleware(RequestDelegate next, LoggingConfiguration loggingConfiguration)
         {
             _next = next;
+            _loggingConfiguration = loggingConfiguration;
         }
 
         #endregion
@@ -37,7 +40,10 @@ namespace Infrastructure.Logging
                 _logger = logger;
 
                 var request = httpContext.Request;
-                if (request.Path.StartsWithSegments(new PathString("/api")))
+                if (request.Path.StartsWithSegments(new PathString("/api")) &&
+                    (_loggingConfiguration?.IgnoredPaths == null ||
+                     !_loggingConfiguration.IgnoredPaths.Any(p => p.Method.Equals(request.Method, StringComparison.InvariantCultureIgnoreCase)
+                                                                && request.Path.StartsWithSegments(new PathString(p.Path)))))
                 {
                     var stopWatch = Stopwatch.StartNew();
                     var requestBodyContent = await ReadRequestBody(request);
@@ -104,27 +110,23 @@ namespace Infrastructure.Logging
                             string requestBody,
                             string responseBody)
         {
-            if (path.ToLower().StartsWith("/api/login"))
+            if (_loggingConfiguration.LogsMaximumLength > 0)
             {
-                requestBody = "(Request logging disabled for /api/login)";
-                responseBody = "(Response logging disabled for /api/login)";
-            }
+                if (requestBody.Length > _loggingConfiguration.LogsMaximumLength)
+                {
+                    requestBody = $"(Truncated to {_loggingConfiguration.LogsMaximumLength} chars) {requestBody.Substring(0, _loggingConfiguration.LogsMaximumLength)}";
+                }
 
-            if (requestBody.Length > 200)
-            {
-                requestBody = $"(Truncated to 200 chars) {requestBody.Substring(0, 200)}";
-            }
+                if (responseBody.Length > _loggingConfiguration.LogsMaximumLength)
+                {
+                    responseBody = $"(Truncated to {_loggingConfiguration.LogsMaximumLength} chars) {responseBody.Substring(0, _loggingConfiguration.LogsMaximumLength)}";
+                }
 
-            if (responseBody.Length > 200)
-            {
-                responseBody = $"(Truncated to 200 chars) {responseBody.Substring(0, 200)}";
+                if (queryString.Length > _loggingConfiguration.LogsMaximumLength)
+                {
+                    queryString = $"(Truncated to {_loggingConfiguration.LogsMaximumLength} chars) {queryString.Substring(0, _loggingConfiguration.LogsMaximumLength)}";
+                }
             }
-
-            if (queryString.Length > 200)
-            {
-                queryString = $"(Truncated to 200 chars) {queryString.Substring(0, 200)}";
-            }
-
             _logger.LogInformation(JsonConvert.SerializeObject(new
             {
                 ElapsedMilliseconds = elapsedMilliseconds,
