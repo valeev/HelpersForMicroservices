@@ -59,21 +59,13 @@ namespace Infrastructure.Logging
                 }
                 else
                 {
-                    switch (exception.Code.ToLower())
+                    serviceError.StatusCode = exception.Code.ToLower() switch
                     {
-                        case "notfound":
-                            serviceError.StatusCode = 404;
-                            break;
-                        case "notauthorized":
-                            serviceError.StatusCode = 401;
-                            break;
-                        case "invalidparameters":
-                            serviceError.StatusCode = 422;
-                            break;
-                        default:
-                            serviceError.StatusCode = 500;
-                            break;
-                    }
+                        "notfound" => 404,
+                        "notauthorized" => 401,
+                        "invalidparameters" => 422,
+                        _ => 500
+                    };
                 }
 
             }
