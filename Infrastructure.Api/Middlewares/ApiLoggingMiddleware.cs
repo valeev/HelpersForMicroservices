@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace Infrastructure.Api
 {
@@ -19,21 +20,19 @@ namespace Infrastructure.Api
 
         private readonly RequestDelegate _next;
         private ILogger<ApiLoggingMiddleware> _logger;
-        private LoggingConfiguration _loggingConfiguration;
 
         #endregion
 
         #region Constructors
 
-        public ApiLoggingMiddleware(RequestDelegate next, LoggingConfiguration loggingConfiguration)
+        public ApiLoggingMiddleware(RequestDelegate next)
         {
             _next = next;
-            _loggingConfiguration = loggingConfiguration;
         }
 
         #endregion
 
-        public async Task Invoke(HttpContext httpContext, ILogger<ApiLoggingMiddleware> logger)
+        public async Task Invoke(HttpContext httpContext, ILogger<ApiLoggingMiddleware> logger, IOptions<LogsConfig> logsConfig)
         {
             try
             {
@@ -41,8 +40,8 @@ namespace Infrastructure.Api
 
                 var request = httpContext.Request;
                 if (request.Path.StartsWithSegments(new PathString("/api")) &&
-                    (_loggingConfiguration?.IgnoredPaths == null ||
-                     !_loggingConfiguration.IgnoredPaths.Any(p => p.Method.Equals(request.Method, StringComparison.InvariantCultureIgnoreCase)
+                    (logsConfig.Value?.IgnoredPaths == null ||
+                     !logsConfig.Value.IgnoredPaths.Any(p => p.Method.Equals(request.Method, StringComparison.InvariantCultureIgnoreCase)
                                                                 && request.Path.StartsWithSegments(new PathString(p.Path)))))
                 {
                     var stopWatch = Stopwatch.StartNew();
@@ -65,7 +64,8 @@ namespace Infrastructure.Api
                             request.Path,
                             request.QueryString.ToString(),
                             requestBodyContent,
-                            responseBodyContent);
+                            responseBodyContent,
+                            logsConfig);
                     }
                 }
                 else
@@ -108,23 +108,24 @@ namespace Infrastructure.Api
                             string path,
                             string queryString,
                             string requestBody,
-                            string responseBody)
+                            string responseBody,
+                            IOptions<LogsConfig> logsConfig)
         {
-            if (_loggingConfiguration.LogsMaximumLength > 0)
+            if (logsConfig.Value.LogsMaximumLength > 0)
             {
-                if (requestBody.Length > _loggingConfiguration.LogsMaximumLength)
+                if (requestBody.Length > logsConfig.Value.LogsMaximumLength)
                 {
-                    requestBody = $"(Truncated to {_loggingConfiguration.LogsMaximumLength} chars) {requestBody.Substring(0, _loggingConfiguration.LogsMaximumLength)}";
+                    requestBody = $"(Truncated to {logsConfig.Value.LogsMaximumLength} chars) {requestBody.Substring(0, logsConfig.Value.LogsMaximumLength)}";
                 }
 
-                if (responseBody.Length > _loggingConfiguration.LogsMaximumLength)
+                if (responseBody.Length > logsConfig.Value.LogsMaximumLength)
                 {
-                    responseBody = $"(Truncated to {_loggingConfiguration.LogsMaximumLength} chars) {responseBody.Substring(0, _loggingConfiguration.LogsMaximumLength)}";
+                    responseBody = $"(Truncated to {logsConfig.Value.LogsMaximumLength} chars) {responseBody.Substring(0, logsConfig.Value.LogsMaximumLength)}";
                 }
 
-                if (queryString.Length > _loggingConfiguration.LogsMaximumLength)
+                if (queryString.Length > logsConfig.Value.LogsMaximumLength)
                 {
-                    queryString = $"(Truncated to {_loggingConfiguration.LogsMaximumLength} chars) {queryString.Substring(0, _loggingConfiguration.LogsMaximumLength)}";
+                    queryString = $"(Truncated to {logsConfig.Value.LogsMaximumLength} chars) {queryString.Substring(0, logsConfig.Value.LogsMaximumLength)}";
                 }
             }
             _logger.LogInformation(JsonConvert.SerializeObject(new
