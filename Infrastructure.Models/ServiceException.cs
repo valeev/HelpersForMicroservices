@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Infrastructure.Models
 {
@@ -19,12 +20,29 @@ namespace Infrastructure.Models
         /// </summary>
         public string Code { get; }
 
+        /// <summary>
+        /// Validation errors
+        /// </summary>
+        public List<ValidationError> ValidationErrors { get; }
+
         #endregion
 
         #region Constructors
 
         protected ServiceException()
         {
+        }
+
+        public ServiceException(ServiceError serviceError)
+            : this(serviceError.StatusCode, serviceError.Code, serviceError.Message)
+        {
+
+        }
+
+        public ServiceException(ServiceValidationError serviceValidationError)
+            : this(serviceValidationError.StatusCode, serviceValidationError.Code, serviceValidationError.Message, serviceValidationError.ValidationErrors)
+        {
+
         }
 
         public ServiceException(string code)
@@ -49,13 +67,18 @@ namespace Infrastructure.Models
         }
 
         public ServiceException(int statusCode, string code, string message, params object[] args)
-            : this(null, code, message, args)
+            : this(null, statusCode, code, message, null, args)
         {
-            StatusCode = statusCode;
+        }
+
+        public ServiceException(int statusCode, string code, string message, List<ValidationError> validationErrors, params object[] args)
+            : this(null, statusCode, code, message, validationErrors, args)
+        {
+
         }
 
         public ServiceException(Exception innerException, string message, params object[] args)
-            : this(innerException, string.Empty, message, args)
+            : this(innerException, null, message, args)
         {
         }
 
@@ -70,6 +93,14 @@ namespace Infrastructure.Models
         {
             StatusCode = statusCode;
             Code = code;
+        }
+
+        public ServiceException(Exception innerException, int statusCode, string code, string message, List<ValidationError> validationErrors, params object[] args)
+            : base(string.Format(message, args), innerException)
+        {
+            StatusCode = statusCode;
+            Code = code;
+            ValidationErrors = validationErrors;
         }
 
         #endregion

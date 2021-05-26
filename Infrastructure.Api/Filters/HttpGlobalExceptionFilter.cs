@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 
-namespace Infrastructure.Logging
+namespace Infrastructure.Api
 {
     /// <summary>
     /// Global exception filter

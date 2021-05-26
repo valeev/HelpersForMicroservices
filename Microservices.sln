@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Api", "Infra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Contracts", "Infrastructure.Contracts\Infrastructure.Contracts.csproj", "{E85667E3-21C6-4537-9B9E-5565D34C5032}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Models", "Infrastructure.Models\Infrastructure.Models.csproj", "{D9E46786-E614-4C2B-8393-09ED9822F4CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Models", "Infrastructure.Models\Infrastructure.Models.csproj", "{D9E46786-E614-4C2B-8393-09ED9822F4CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Helpers", "Infrastructure.Helpers\Infrastructure.Helpers.csproj", "{B81F0B5D-876F-4F69-ADEA-20E951F10EEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Helpers", "Infrastructure.Helpers\Infrastructure.Helpers.csproj", "{B81F0B5D-876F-4F69-ADEA-20E951F10EEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
