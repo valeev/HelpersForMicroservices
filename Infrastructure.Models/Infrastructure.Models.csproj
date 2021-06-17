@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
+		<TargetFramework>net5.0</TargetFramework>
 		<TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
 		<Authors>Dmitry Valeev</Authors>
 		<Company>Valeev</Company>
@@ -9,10 +9,10 @@
 		<Description>Generatl models for microservices</Description>
 		<PackageProjectUrl>https://github.com/valeev/HelpersForMicroservices</PackageProjectUrl>
 		<PackageTags>helper, middleware, common</PackageTags>
-		<Version>1.1.8</Version>
-		<AssemblyVersion>1.1.8.0</AssemblyVersion>
+		<Version>1.1.10</Version>
+		<AssemblyVersion>1.1.10.0</AssemblyVersion>
 		<PackageId>Valeev.Infrastructure.Models</PackageId>
-		<FileVersion>1.1.8.0</FileVersion>
+		<FileVersion>1.1.10.0</FileVersion>
 		<ServerGarbageCollection>false</ServerGarbageCollection>
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
