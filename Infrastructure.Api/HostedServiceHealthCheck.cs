@@ -16,18 +16,18 @@ namespace Infrastructure.Api
         /// <summary>
         /// Name
         /// </summary>
-        public string Name => "slow_dependency_check";
+        public static string Name => "slow_dependency_check";
 
         /// <summary>
         /// List of background services and their status
         /// </summary>
-        public Dictionary<string, bool> BackgroundServices { get; set; } = new Dictionary<string, bool>();
+        public Dictionary<string, bool> BackgroundServices { get; set; } = new();
 
         /// <summary>
         /// Check is process is ended
         /// </summary>
         /// <returns></returns>
-        public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
             if (BackgroundServices.All(t => t.Value))
             {

@@ -1,26 +1,28 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
-    <Authors>Dmitry Valeev</Authors>
-    <Company>Valeev</Company>
-    <Title>Helpers for microservices</Title>
-    <Description>Helper functions for microservices</Description>
-    <PackageProjectUrl>https://github.com/valeev/HelpersForMicroservices</PackageProjectUrl>
-    <PackageTags>helper, middleware, common</PackageTags>
-    <Version>1.1.0</Version>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
-    <PackageId>Valeev.Infrastructure.Helpers</PackageId>
-    <FileVersion>1.1.0.0</FileVersion>
-    <ServerGarbageCollection>false</ServerGarbageCollection>
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+		<Authors>Dmitry Valeev</Authors>
+		<Company>Valeev</Company>
+		<Title>Helpers for microservices</Title>
+		<Description>Helper functions for microservices</Description>
+		<PackageProjectUrl>https://github.com/valeev/HelpersForMicroservices</PackageProjectUrl>
+		<PackageTags>helper, middleware, common</PackageTags>
+		<Version>6.0.1</Version>
+		<AssemblyVersion>6.0.1.0</AssemblyVersion>
+		<PackageId>Valeev.Infrastructure.Helpers</PackageId>
+		<FileVersion>6.0.1.0</FileVersion>
+		<ServerGarbageCollection>false</ServerGarbageCollection>
+	</PropertyGroup>
 
-  <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
-    <ItemGroup>
-      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
-    </ItemGroup>
-  </Target>
+	<Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
+		<ItemGroup>
+			<BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+		</ItemGroup>
+	</Target>
 
 </Project>

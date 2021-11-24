@@ -104,7 +104,7 @@ namespace Infrastructure.Api
         {
             public delegate void AppendToDictionary(IDictionary<string, object> dictionary, object o);
 
-            private static readonly ConcurrentDictionary<Type, AppendToDictionary> s_typeCache = new ConcurrentDictionary<Type, AppendToDictionary>();
+            private static readonly ConcurrentDictionary<Type, AppendToDictionary> s_typeCache = new();
             private static readonly PropertyInfo _dictionaryIndexerProperty = GetDictionaryIndexer();
 
             public static AppendToDictionary GetOrCreateAppendToDictionaryMethod(Type type)

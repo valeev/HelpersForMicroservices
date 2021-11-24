@@ -12,7 +12,7 @@ namespace Infrastructure.Contracts
         /// <summary>
         /// Service information properties
         /// </summary>
-        public Dictionary<string, string> Information { get; set; }
+        public Dictionary<string, string> Information { get; set; } = null!;
 
         #endregion
 

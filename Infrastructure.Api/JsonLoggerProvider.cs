@@ -6,8 +6,8 @@ namespace Infrastructure.Api
 {
     public sealed class JsonLoggerProvider : ILoggerProvider
     {
-        private readonly LoggerExternalScopeProvider _scopeProvider = new LoggerExternalScopeProvider();
-        private readonly ConcurrentDictionary<string, JsonLogger> _loggers = new ConcurrentDictionary<string, JsonLogger>(StringComparer.Ordinal);
+        private readonly LoggerExternalScopeProvider _scopeProvider = new();
+        private readonly ConcurrentDictionary<string, JsonLogger> _loggers = new(StringComparer.Ordinal);
 
         public ILogger CreateLogger(string categoryName)
         {

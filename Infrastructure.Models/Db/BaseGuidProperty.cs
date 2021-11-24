@@ -1,18 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Infrastructure.Models.Db
+namespace Infrastructure.Models
 {
     /// <summary>
     /// Base properties for models
     /// </summary>
-    public abstract class BaseLongProperty
+    public abstract class BaseGuidProperty
     {
         #region Properties
 
         /// <summary>
         /// Unique id
         /// </summary>
-        public long Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Record creation date

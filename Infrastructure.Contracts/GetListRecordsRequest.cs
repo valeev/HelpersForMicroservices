@@ -8,13 +8,13 @@
         /// <summary>
         /// Search string
         /// </summary>
-        public string Search { get; set; }
+        public string Search { get; set; } = null!;
 
         /// <summary>
         /// Sort by field
         /// Possible values: fieldName_desk, fieldName_asc, fieldName
         /// </summary>
-        public string SortBy { get; set; }
+        public string SortBy { get; set; } = null!;
 
         /// <summary>
         /// Amount of records for taking
