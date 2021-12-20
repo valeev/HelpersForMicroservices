@@ -12,10 +12,10 @@
 		<Description>Helper functions for microservices</Description>
 		<PackageProjectUrl>https://github.com/valeev/HelpersForMicroservices</PackageProjectUrl>
 		<PackageTags>helper, middleware, common</PackageTags>
-		<Version>6.0.1</Version>
-		<AssemblyVersion>6.0.1.0</AssemblyVersion>
+		<Version>6.0.2</Version>
+		<AssemblyVersion>6.0.2.0</AssemblyVersion>
 		<PackageId>Valeev.Infrastructure.Helpers</PackageId>
-		<FileVersion>6.0.1.0</FileVersion>
+		<FileVersion>6.0.2.0</FileVersion>
 		<ServerGarbageCollection>false</ServerGarbageCollection>
 	</PropertyGroup>
 

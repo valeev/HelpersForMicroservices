@@ -1,16 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿namespace Infrastructure.Contracts;
 
-namespace Infrastructure.Contracts
+/// <summary>
+/// Common interface for all services
+/// </summary>
+public interface ICommonService
 {
     /// <summary>
-    /// Common interface for all services
+    /// Return current service info
     /// </summary>
-    public interface ICommonService
-    {
-        /// <summary>
-        /// Return current service info
-        /// </summary>
-        /// <returns></returns>
-        Task<GetServiceInfoResponse> GetServiceInfo();
-    }
+    /// <returns></returns>
+    Task<GetServiceInfoResponse> GetServiceInfo();
 }

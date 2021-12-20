@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
+﻿namespace Infrastructure.Models;
 
-namespace Infrastructure.Models
+/// <summary>
+/// Service validation error
+/// </summary>
+public class ServiceValidationError : ServiceError
 {
     /// <summary>
-    /// Service validation error
+    /// Validation errors
     /// </summary>
-    public class ServiceValidationError : ServiceError
-    {
-        /// <summary>
-        /// Validation errors
-        /// </summary>
-        public List<ValidationError> ValidationErrors { get; set; }
-    }
+    public List<ValidationError> ValidationErrors { get; set; }
 }

@@ -1,16 +1,18 @@
-﻿namespace Infrastructure.Models;
+namespace Infrastructure.Models;
 
 /// <summary>
 /// Base properties for models
 /// </summary>
-public abstract class BaseProperty
+public abstract class BaseCodeNameProperty
 {
     #region Properties
 
+    [Key]
+    [MaxLength(32)]
     /// <summary>
-    /// Unique id
+    /// Unique Code Name
     /// </summary>
-    public int Id { get; set; }
+    public string CodeName { get; set; }
 
     /// <summary>
     /// Record creation date

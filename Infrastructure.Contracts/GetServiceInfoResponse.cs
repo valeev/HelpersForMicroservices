@@ -1,32 +1,29 @@
-﻿using System.Collections.Generic;
+﻿namespace Infrastructure.Contracts;
 
-namespace Infrastructure.Contracts
+/// <summary>
+/// Response to getting service info
+/// </summary>
+public class GetServiceInfoResponse
 {
+    #region Properties
+
     /// <summary>
-    /// Response to getting service info
+    /// Service information properties
     /// </summary>
-    public class GetServiceInfoResponse
+    public Dictionary<string, string> Information { get; set; } = null!;
+
+    #endregion
+
+    #region Constructors
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    /// <param name="information">Information</param>
+    public GetServiceInfoResponse(Dictionary<string, string> information)
     {
-        #region Properties
-
-        /// <summary>
-        /// Service information properties
-        /// </summary>
-        public Dictionary<string, string> Information { get; set; } = null!;
-
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        /// <param name="information">Information</param>
-        public GetServiceInfoResponse(Dictionary<string, string> information)
-        {
-            Information = information;
-        }
-
-        #endregion
+        Information = information;
     }
+
+    #endregion
 }
