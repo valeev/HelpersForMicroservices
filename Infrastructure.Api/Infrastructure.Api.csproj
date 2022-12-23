@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 		<LangVersion>latest</LangVersion>
@@ -12,19 +12,19 @@
 		<Description>Logs middleware for .net core WebApi and hosts extensions</Description>
 		<PackageProjectUrl>https://github.com/valeev/HelpersForMicroservices</PackageProjectUrl>
 		<PackageTags>helper, middleware, logs</PackageTags>
-		<Version>6.0.2</Version>
-		<AssemblyVersion>6.0.2.0</AssemblyVersion>
+		<Version>7.0.0</Version>
+		<AssemblyVersion>7.0.0.0</AssemblyVersion>
 		<PackageId>Valeev.Infrastructure.Api</PackageId>
-		<FileVersion>6.0.2.0</FileVersion>
+		<FileVersion>7.0.0.0</FileVersion>
 		<ServerGarbageCollection>false</ServerGarbageCollection>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="6.0.1" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="Polly" Version="7.2.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="7.0.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+		<PackageReference Include="Polly" Version="7.2.3" />
 	</ItemGroup>
 
 	<ItemGroup>
